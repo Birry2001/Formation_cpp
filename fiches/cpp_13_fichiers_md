@@ -62,7 +62,6 @@ if (fichier.is_open()) {
 }
 
 ```
-
 **Astuce pour lire une ligne complète :** Si votre fichier contient des espaces, utilisez `std::getline` pour ne pas couper les phrases. [[29:52](http://www.youtube.com/watch?v=s98HCale71U&t=1792)]
 
 ---
