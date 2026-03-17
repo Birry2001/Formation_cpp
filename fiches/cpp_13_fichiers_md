@@ -1,0 +1,93 @@
+Salut à tous ! Bienvenue pour cette treizième séance en C++. Aujourd'hui, on s'attaque à un morceau fondamental : la **gestion des fichiers**.
+
+Jusqu'à présent, toutes vos variables disparaissaient dès que vous fermiez votre programme. C'est ce qu'on appelle des données volatiles. Aujourd'hui, on va apprendre à rendre ces données **persistantes** en les enregistrant sur votre disque dur. Allez, on passe sur le code !
+
+---
+
+### 1. Les Flux et l'en-tête `fstream` [[04:03](http://www.youtube.com/watch?v=s98HCale71U&t=243)]
+
+En C++, on manipule les fichiers comme des **flux** (streams), exactement comme on le faisait avec `std::cin` et `std::cout`. Tout ce que vous avez appris sur les chevrons `<<` et `>>` s'applique ici !
+
+Pour commencer, il faut inclure la bibliothèque dédiée :
+
+```cpp
+#include <fstream> // File Stream [00:05:07]
+
+```
+
+---
+
+### 2. Écrire dans un fichier (`std::ofstream`) [[21:12](http://www.youtube.com/watch?v=s98HCale71U&t=1272)]
+
+Pour envoyer des données vers un fichier (Output File Stream), on utilise `ofstream`.
+
+```cpp
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    // Création du flux et ouverture du fichier [00:21:22]
+    std::ofstream fichier("score.txt");
+
+    if (fichier.is_open()) { // Toujours vérifier si l'ouverture a réussi [00:21:46]
+        int scoreJoueur {150};
+        fichier << "Score final : " << scoreJoueur << std::endl; // On écrit dedans !
+        
+        fichier.close(); // Fermeture manuelle (bonne pratique) [00:20:11]
+    } else {
+        std::cerr << "Erreur : Impossible d'ouvrir le fichier !" << std::endl;
+    }
+
+    return 0;
+}
+
+```
+
+---
+
+### 3. Lire un fichier (`std::ifstream`) [[11:15](http://www.youtube.com/watch?v=s98HCale71U&t=675)]
+
+Pour récupérer des données (Input File Stream), on utilise `ifstream`.
+
+```cpp
+std::ifstream fichier("animaux.txt");
+std::string nom;
+
+if (fichier.is_open()) {
+    // Lecture mot par mot (s'arrête aux espaces) [00:13:21]
+    while (fichier >> nom) {
+        std::cout << "Animal lu : " << nom << std::endl;
+    }
+}
+
+```
+
+**Astuce pour lire une ligne complète :** Si votre fichier contient des espaces, utilisez `std::getline` pour ne pas couper les phrases. [[29:52](http://www.youtube.com/watch?v=s98HCale71U&t=1792)]
+
+---
+
+### 4. Les différents modes d'ouverture [[24:06](http://www.youtube.com/watch?v=s98HCale71U&t=1446)]
+
+Vous pouvez préciser comment vous voulez ouvrir votre fichier en ajoutant un deuxième paramètre :
+
+* **`std::ios::in`** : Lecture (par défaut pour `ifstream`).
+* **`std::ios::out`** : Écriture (écrase le contenu existant).
+* **`std::ios::app`** : *Append* (ajoute à la fin du fichier sans rien effacer). [[27:44](http://www.youtube.com/watch?v=s98HCale71U&t=1664)]
+* **`std::ios::binary`** : Mode binaire (pour les images, sons, etc., au lieu du texte). [[24:41](http://www.youtube.com/watch?v=s98HCale71U&t=1481)]
+
+---
+
+### Fiche Mémoire Express 📝
+
+| Outil | Rôle | Flux |
+| --- | --- | --- |
+| **`std::ofstream`** | Écriture | Sortie (Programme -> Fichier) |
+| **`std::ifstream`** | Lecture | Entrée (Fichier -> Programme) |
+| **`is_open()`** | Sécurité | Vérifie si le fichier est accessible. |
+| **`close()`** | Propreté | Libère le fichier pour les autres logiciels. |
+| **`std::ios::app`** | Ajout | Écrit à la suite du fichier existant. |
+
+**Votre mission :** Créez un programme qui demande son nom à l'utilisateur, l'enregistre dans un fichier `save.txt`, puis relisez ce fichier pour afficher "Bon retour, [Nom] !". [[23:18](http://www.youtube.com/watch?v=s98HCale71U&t=1398)]
+
+N'oubliez pas que tout ce qui est écrit sur un fichier reste là, même après un redémarrage. C'est la base de toute sauvegarde ! Si vous avez des soucis de lecture ou de chemins de fichiers, posez vos questions en commentaire. À bientôt pour la suite ! [[32:43](http://www.youtube.com/watch?v=s98HCale71U&t=1963)]
