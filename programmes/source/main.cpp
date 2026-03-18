@@ -1,9 +1,13 @@
 #include <iostream>
 #include "../include/math.hpp"
 #include "../include/texte.hpp"
+#include "../include/gesion_fichiers.hpp"
+#include "../include/classes.hpp"
+#include <string>
 
 int main()
 {
+    /*
     std::cout <<"Hello WORLD"<< std::endl;
     //float prix {19.99f}; 
     char yo = 'o';
@@ -33,6 +37,20 @@ int main()
     Math::multiplication(3,6);
     Texte::bonjour();
     Texte::addition();
+    gestionaire();
+    */
+
+    CompteBancaire compte1{"NOCHI", 5000};
+
+    compte1.affichesolde();
+    compte1.deposer(2000);
+    compte1.retirer(500);
+    compte1.affichesolde();
+    std::cout<<"voici le nom du propriétaire:"<<compte1.getProprietaire()<<std::endl;
+
+
+    //
+
     return 0;
 
 }

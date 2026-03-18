@@ -1,8 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../include/gesion_fichiers.hpp"
 
-int main() {
+void gestionaire() {
+
 
     std::string name{""};
     int age{0};
@@ -19,7 +21,7 @@ int main() {
     }
     else {
         std::cerr << "Impossible d'ouvrir le fichier." << std::endl;
-        return 1;
+
     }
 
     std::ifstream file_("profil.txt");
@@ -33,7 +35,7 @@ int main() {
     }
     else {
         std::cerr << "Impossible d'ouvrir le fichier." << std::endl;
-        return 1;
+
     }
 
     std::ofstream number("nombres.bin", std::ios::binary);
@@ -44,7 +46,7 @@ int main() {
     }
     else {
         std::cerr << "Impossible d'ouvrir le fichier." << std::endl;
-        return 1;
+
     }
     std::ifstream number_("nombres.bin", std::ios::binary);
     if (number_.is_open()) {
@@ -59,8 +61,8 @@ int main() {
     }
     else {
         std::cerr << "Impossible d'ouvrir le fichier." << std::endl;
-        return 1;
+
     }
 
-    return 0;
+    //
 }
